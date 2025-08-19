@@ -490,6 +490,22 @@
             <div class="inspirational-quote">
                 🌟 Brilla, porque tus quince son el reflejo de la niña que fuiste y de la mujer que empiezas a ser. 🌟
             </div>
+            <button id="download-video-btn" style="
+    margin-top: 20px;
+    padding: 12px 28px;
+    font-size: 1.1rem;
+    background: linear-gradient(90deg, #4a7a4d, #d4af37, #5a8f5e);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    box-shadow: 0 4px 16px rgba(45,79,48,0.15);
+    transition: background 0.3s;
+">
+    Descargar video de invitación 🎬
+</button>
         </div>
     </div>
 
@@ -620,6 +636,7 @@
                 // Reproducir/pausar música
                 toggleBackgroundMusic();
                 
+                
                 // Crear efecto de estrellas
                 const rect = invitationCard.getBoundingClientRect();
                 const x = e.clientX;
@@ -679,6 +696,40 @@
                 initializeAudio();
             }
         }, { once: true });
+
+
+
+        // Descargar el video al hacer clic en el botón
+document.addEventListener('DOMContentLoaded', function() {
+    const downloadBtn = document.getElementById('download-video-btn');
+    if (downloadBtn) {
+        downloadBtn.addEventListener('click', function(e) {
+            e.stopPropagation(); // Evita que se dispare el evento de la tarjeta
+            const link = document.createElement('a');
+            link.href = 'invitacion.mp4';
+            link.download = 'invitacion.mp4';
+            link.style.display = 'none';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+    }
+
+    // Descargar el video al hacer clic en la corona
+    const crown = document.querySelector('.crown');
+    if (crown) {
+        crown.addEventListener('click', function(e) {
+            e.stopPropagation(); // Evita que se dispare el evento de la tarjeta
+            const link = document.createElement('a');
+            link.href = 'invitacion.mp4';
+            link.download = 'invitacion.mp4';
+            link.style.display = 'none';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+    }
+});
     </script>
 </body>
 </html>
