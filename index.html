@@ -699,27 +699,25 @@
 
 
 
-        // Descargar el video al hacer clic en el botón
-document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function() {
+    const invitationCard = document.getElementById('invitation-card');
     const downloadBtn = document.getElementById('download-video-btn');
+// Oculta el botón en Android
+    if (downloadBtn && /Android/i.test(navigator.userAgent)) {
+        downloadBtn.style.display = 'none';
+    }
+    // Evento para la tarjeta (música y estrellas)
+    invitationCard.addEventListener('click', function(e) {
+        // Solo si NO fue el botón
+        if (e.target === downloadBtn) return;
+        toggleBackgroundMusic();
+        // ...efecto de estrellas y visual...
+    });
+
+    // Evento para el botón (descarga)
     if (downloadBtn) {
         downloadBtn.addEventListener('click', function(e) {
-            e.stopPropagation(); // Evita que se dispare el evento de la tarjeta
-            const link = document.createElement('a');
-            link.href = 'invitacion.mp4';
-            link.download = 'invitacion.mp4';
-            link.style.display = 'none';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        });
-    }
-
-    // Descargar el video al hacer clic en la corona
-    const crown = document.querySelector('.crown');
-    if (crown) {
-        crown.addEventListener('click', function(e) {
-            e.stopPropagation(); // Evita que se dispare el evento de la tarjeta
+            e.stopPropagation(); // Evita que el clic llegue a la tarjeta
             const link = document.createElement('a');
             link.href = 'invitacion.mp4';
             link.download = 'invitacion.mp4';
