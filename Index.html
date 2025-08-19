@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quinceañera - Ximena de la Rosa</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #3b633e 0%, #4a7a4d 50%, #5a8f5e 100%);
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        /* Patrón de fondo sutil */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(230, 237, 214, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(230, 237, 214, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(230, 237, 214, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .invitation-container {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 1;
+        }
+        
+        .floating-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(230, 237, 214, 0.4);
+            border-radius: 50%;
+            animation: float 8s infinite ease-in-out;
+            filter: blur(1px);
+        }
+        
+        .particle:nth-child(1) { width: 6px; height: 6px; left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { width: 8px; height: 8px; left: 20%; animation-delay: 1.5s; }
+        .particle:nth-child(3) { width: 4px; height: 4px; left: 30%; animation-delay: 3s; }
+        .particle:nth-child(4) { width: 7px; height: 7px; left: 40%; animation-delay: 4.5s; }
+        .particle:nth-child(5) { width: 5px; height: 5px; left: 50%; animation-delay: 6s; }
+        .particle:nth-child(6) { width: 9px; height: 9px; left: 60%; animation-delay: 0.8s; }
+        .particle:nth-child(7) { width: 3px; height: 3px; left: 70%; animation-delay: 2.3s; }
+        .particle:nth-child(8) { width: 6px; height: 6px; left: 80%; animation-delay: 3.8s; }
+        .particle:nth-child(9) { width: 5px; height: 5px; left: 90%; animation-delay: 5.3s; }
+        
+        @keyframes float {
+            0% { 
+                transform: translateY(100vh) translateX(0) rotate(0deg); 
+                opacity: 0; 
+            }
+            5% { opacity: 0.6; }
+            95% { opacity: 0.6; }
+            100% { 
+                transform: translateY(-100px) translateX(50px) rotate(180deg); 
+                opacity: 0; 
+            }
+        }
+        
+        .invitation-card {
+            background: rgba(230, 237, 214, 0.98);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 60px 50px;
+            max-width: 520px;
+            width: 100%;
+            box-shadow: 
+                0 32px 64px rgba(59, 99, 62, 0.3),
+                0 16px 32px rgba(59, 99, 62, 0.2),
+                0 0 0 1px rgba(59, 99, 62, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            text-align: center;
+            position: relative;
+            animation: cardAppear 1.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 2px solid rgba(59, 99, 62, 0.2);
+            z-index: 2;
+        }
+        
+        .invitation-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, #3b633e, #4a7a4d, #5a8f5e, #3b633e);
+            border-radius: 24px;
+            z-index: -1;
+            opacity: 0;
+            animation: borderPulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes borderPulse {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 0.3; }
+        }
+        
+        @keyframes cardAppear {
+            0% {
+                opacity: 0;
+                transform: scale(0.9) translateY(60px) rotateX(10deg);
+            }
+            70% {
+                transform: scale(1.02) translateY(-10px) rotateX(0deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0) rotateX(0deg);
+            }
+        }
+        
+        .crown {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            animation: crownFloat 3s ease-in-out infinite;
+            filter: drop-shadow(0 4px 8px rgba(59, 99, 62, 0.3));
+        }
+        
+        @keyframes crownFloat {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg) scale(1);
+            }
+            50% { 
+                transform: translateY(-8px) rotate(2deg) scale(1.05);
+            }
+        }
+        
+        .quinceañera-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.8rem;
+            color: #3b633e;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(59, 99, 62, 0.1);
+            letter-spacing: 1px;
+        }
+        
+        .name {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.2rem;
+            color: #2d4f30;
+            margin: 25px 0;
+            font-weight: 700;
+            text-shadow: 3px 3px 6px rgba(59, 99, 62, 0.2);
+            animation: nameGlow 4s infinite ease-in-out;
+            line-height: 1.1;
+        }
+        
+        @keyframes nameGlow {
+            0%, 100% { 
+                transform: scale(1);
+                text-shadow: 3px 3px 6px rgba(59, 99, 62, 0.2);
+            }
+            50% { 
+                transform: scale(1.02);
+                text-shadow: 4px 4px 12px rgba(59, 99, 62, 0.3);
+            }
+        }
+        
+        .parents {
+            color: #3b633e;
+            margin: 30px 0;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            font-weight: 400;
+        }
+        
+        .parents strong {
+            color: #2d4f30;
+            font-weight: 600;
+        }
+        
+        .details {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+            border-radius: 20px;
+            padding: 35px 30px;
+            margin: 35px 0;
+            border: 2px solid rgba(59, 99, 62, 0.2);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        
+        .details::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(59, 99, 62, 0.08), transparent);
+            animation: shimmer 5s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        .detail-item {
+            margin: 20px 0;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease;
+        }
+        
+        .detail-item:hover {
+            transform: translateY(-2px);
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            color: #3b633e;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .detail-value {
+            color: #2d4f30;
+            font-size: 1.25rem;
+            font-weight: 500;
+        }
+        
+        .date-time {
+            font-size: 1.4rem !important;
+            font-weight: 700 !important;
+        }
+        
+        .location {
+            font-size: 1.15rem;
+            font-style: italic;
+            line-height: 1.4;
+        }
+        
+        .decorative-line {
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #3b633e, transparent);
+            margin: 25px 0;
+            border-radius: 2px;
+            animation: pulse 3s infinite ease-in-out;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { 
+                opacity: 0.4; 
+                transform: scaleX(0.8);
+            }
+            50% { 
+                opacity: 1; 
+                transform: scaleX(1);
+            }
+        }
+        
+        .celebration-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            color: #3b633e;
+            margin-top: 35px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(59, 99, 62, 0.1);
+            animation: celebrationPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes celebrationPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        
+        .flowers {
+            position: absolute;
+            font-size: 2.2rem;
+            opacity: 0.7;
+            animation: floatFlowers 10s infinite ease-in-out;
+            filter: drop-shadow(2px 2px 4px rgba(59, 99, 62, 0.2));
+        }
+        
+        .flower-1 {
+            top: 12%;
+            left: 8%;
+            animation-delay: 0s;
+        }
+        
+        .flower-2 {
+            top: 18%;
+            right: 12%;
+            animation-delay: 2.5s;
+        }
+        
+        .flower-3 {
+            bottom: 18%;
+            left: 10%;
+            animation-delay: 5s;
+        }
+        
+        .flower-4 {
+            bottom: 12%;
+            right: 8%;
+            animation-delay: 7.5s;
+        }
+        
+        @keyframes floatFlowers {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg) scale(1); 
+                opacity: 0.7;
+            }
+            25% { 
+                transform: translateY(-15px) rotate(90deg) scale(1.1); 
+                opacity: 0.9;
+            }
+            50% { 
+                transform: translateY(-25px) rotate(180deg) scale(1); 
+                opacity: 0.7;
+            }
+            75% { 
+                transform: translateY(-15px) rotate(270deg) scale(1.1); 
+                opacity: 0.9;
+            }
+        }
+        
+        .sparkle {
+            position: absolute;
+            color: #5a8f5e;
+            animation: sparkle 2s infinite;
+            pointer-events: none;
+            filter: drop-shadow(0 0 6px rgba(90, 143, 94, 0.5));
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { 
+                opacity: 0; 
+                transform: scale(0) rotate(0deg); 
+            }
+            50% { 
+                opacity: 1; 
+                transform: scale(1) rotate(180deg); 
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .invitation-card {
+                padding: 40px 30px;
+                margin: 15px;
+                max-width: 95%;
+            }
+            
+            .name {
+                font-size: 2.6rem;
+            }
+            
+            .quinceañera-title {
+                font-size: 2.2rem;
+            }
+            
+            .celebration-text {
+                font-size: 1.6rem;
+            }
+            
+            .crown {
+                font-size: 3rem;
+            }
+            
+            .details {
+                padding: 25px 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .invitation-card {
+                padding: 30px 20px;
+                border-radius: 20px;
+            }
+            
+            .name {
+                font-size: 2.2rem;
+                margin: 20px 0;
+            }
+            
+            .quinceañera-title {
+                font-size: 1.9rem;
+            }
+            
+            .celebration-text {
+                font-size: 1.4rem;
+                margin-top: 25px;
+            }
+            
+            .crown {
+                font-size: 2.5rem;
+                margin-bottom: 15px;
+            }
+            
+            .details {
+                padding: 20px 15px;
+                margin: 25px 0;
+            }
+            
+            .detail-value {
+                font-size: 1.1rem;
+            }
+            
+            .date-time {
+                font-size: 1.2rem !important;
+            }
+            
+            .flowers {
+                font-size: 1.8rem;
+            }
+        }
+        
+        /* Efectos adicionales para escritorio */
+        @media (min-width: 1024px) {
+            .invitation-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 
+                    0 40px 80px rgba(59, 99, 62, 0.4),
+                    0 20px 40px rgba(59, 99, 62, 0.3),
+                    0 0 0 1px rgba(59, 99, 62, 0.2);
+                transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <div class="invitation-container">
+        <div class="invitation-card">
+            <div class="crown">👑</div>
+            
+            <div class="quinceañera-title">Quinceañera</div>
+            
+            <div class="name">Ximena de la Rosa<br>Huaman Flores</div>
+            
+            <div class="decorative-line"></div>
+            
+            <div class="parents">
+                <strong>Con el honor de invitarle</strong><br>
+                Estela Flores Zuñe<br>
+                Edwin Huaman Gonzales
+            </div>
+            
+            <div class="details">
+                <div class="detail-item">
+                    <div class="detail-label">📅 Fecha</div>
+                    <div class="detail-value date-time">30 de Agosto</div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">🕐 Hora</div>
+                    <div class="detail-value date-time">8:00 PM</div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">📍 Lugar</div>
+                    <div class="detail-value location">Platinum Eventos<br>Av. Conroy 854</div>
+                </div>
+            </div>
+            
+            <div class="celebration-text">¡Acompáñanos en esta noche mágica!</div>
+            
+            <!-- Rosas verdes decorativas -->
+            <div class="flowers flower-1">🌹</div>
+            <div class="flowers flower-2">🌹</div>
+            <div class="flowers flower-3">🌹</div>
+            <div class="flowers flower-4">🌹</div>
+        </div>
+    </div>
+
+    <script>
+        // Crear sparkles dinámicos con colores de la paleta
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.innerHTML = '✨';
+            sparkle.style.left = Math.random() * 100 + '%';
+            sparkle.style.top = Math.random() * 100 + '%';
+            sparkle.style.fontSize = (Math.random() * 25 + 15) + 'px';
+            sparkle.style.animationDuration = (Math.random() * 1 + 1.5) + 's';
+            
+            document.querySelector('.invitation-container').appendChild(sparkle);
+            
+            setTimeout(() => {
+                sparkle.remove();
+            }, 2000);
+        }
+        
+        // Crear sparkles cada 2.5 segundos
+        setInterval(createSparkle, 2500);
+        
+        // Efecto de hover suave en la tarjeta
+        const card = document.querySelector('.invitation-card');
+        let hoverTimeout;
+        
+        card.addEventListener('mouseenter', () => {
+            clearTimeout(hoverTimeout);
+            if (window.innerWidth >= 1024) {
+                card.style.transform = 'translateY(-8px) scale(1.01)';
+                card.style.transition = 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            }
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            hoverTimeout = setTimeout(() => {
+                card.style.transform = 'translateY(0) scale(1)';
+            }, 100);
+        });
+        
+        // Crear más partículas dinámicamente
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.width = (Math.random() * 6 + 3) + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.animationDuration = (Math.random() * 6 + 6) + 's';
+            particle.style.animationDelay = Math.random() * 3 + 's';
+            particle.style.background = `rgba(230, 237, 214, ${Math.random() * 0.4 + 0.2})`;
+            
+            document.querySelector('.floating-particles').appendChild(particle);
+            
+            setTimeout(() => {
+                particle.remove();
+            }, 12000);
+        }
+        
+        // Crear nuevas partículas cada 3.5 segundos
+        setInterval(createParticle, 3500);
+        
+        // Animación de entrada progresiva para elementos
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Aplicar animaciones progresivas en pantallas grandes
+        if (window.innerWidth >= 768) {
+            document.querySelectorAll('.detail-item').forEach((item, index) => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(20px)';
+                item.style.transition = `all 0.6s ease ${index * 0.2}s`;
+                observer.observe(item);
+            });
+        }
+        
+        // Optimización para dispositivos móviles
+        if ('ontouchstart' in window) {
+            document.body.style.overscrollBehavior = 'none';
+        }
+    </script>
+</body>
+</html>
